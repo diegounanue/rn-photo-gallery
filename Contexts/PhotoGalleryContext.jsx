@@ -1,6 +1,11 @@
 import { createContext, useState } from "react";
 
-const PhotoGalleryContext = createContext();
+const PhotoGalleryContext = createContext(
+  {
+    photoGallery: [],
+    addPhotoToGallery: () => {},
+  },
+);
 
 const PhotoGalleryProvider = ({ children }) => {
   const [photoGallery, setPhoto] = useState([]);

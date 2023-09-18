@@ -1,27 +1,22 @@
 import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
 import { Camera } from "expo-camera";
-import { PhotoGalleryContext } from "../../Contexts/PhotoGalleryContext";
 
 export default function CameraScreen({ navigation }) {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [camera, setCamera] = useState(null);
-  const [image, setImage] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
-  const { addPhotoToGallery } = useContext(PhotoGalleryContext);
 
   useEffect(() => {
     (async () => {
-      const cameraStatus = await Camera.requestCameraPermissionsAsync();
-      setHasCameraPermission(cameraStatus.status === "granted");
+      const { granted } = await Camera.requestCameraPermissionsAsync();
+      setHasCameraPermission(granted === true);
     })();
   }, []);
 
   const takePicture = async () => {
     if (camera) {
       const data = await camera.takePictureAsync(null);
-      setImage(data.uri);
-      //addPhotoToGallery(data.uri)
       navigation.navigate("Preview", { photoUri: data.uri });
     }
   };
@@ -29,6 +24,7 @@ export default function CameraScreen({ navigation }) {
   if (hasCameraPermission === false) {
     return <Text>No access to camera</Text>;
   }
+  
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.cameraContainer}>

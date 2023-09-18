@@ -4,9 +4,7 @@ import { Camera } from 'expo-camera';
 import { PhotoGalleryContext } from "../../Contexts/PhotoGalleryContext";
 
 export default function PreviewScreen({ route, navigation }) {
-  const [hasCameraPermission] = useState(null);
   const { addPhotoToGallery } = useContext(PhotoGalleryContext);
-
 
   const { photoUri } = route.params;
 
@@ -21,7 +19,7 @@ export default function PreviewScreen({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-    <Image source={{ uri: photoUri }} style={styles.image} />
+    <Image testID="preview-image" source={{ uri: photoUri }} style={styles.image} />
     <View style={styles.buttonContainer}>
       <Button title="Accept" onPress={handleAccept} />
       <Button title="Reject" onPress={handleReject} />
@@ -40,7 +38,7 @@ const styles = StyleSheet.create({
     },
     image: {
       width: '90%',
-      height: height * 0.8 , // El 90% de la altura de la pantalla
+      height: height * 0.8 ,
       resizeMode: 'cover',
     },
     buttonContainer: {

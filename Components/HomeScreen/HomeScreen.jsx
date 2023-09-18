@@ -42,10 +42,10 @@ function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white", // Color de fondo de la pantalla
+    backgroundColor: "white",
   },
   header: {
-    backgroundColor: "#7e75f8", // Color de fondo celeste
+    backgroundColor: "#7e75f8",
     padding: 10,
     alignItems: "center",
   },
